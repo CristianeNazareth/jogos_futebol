@@ -1,0 +1,1 @@
+Mostra a tabela de partidas de futebol.
