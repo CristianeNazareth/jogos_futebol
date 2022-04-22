@@ -6,6 +6,8 @@ from sqlalchemy.orm import sessionmaker
 
 Base = declarative_base()
 
+# debug
+# database = create_engine(DATABASE_URI, echo=True)
 database = create_engine(DATABASE_URI)
 
 Session = sessionmaker(bind=database)
