@@ -1,8 +1,8 @@
 from sqlalchemy import create_engine
 from config import DATABASE_URI
 from sqlalchemy.ext.declarative import declarative_base
-
 from sqlalchemy.orm import sessionmaker
+
 
 Base = declarative_base()
 

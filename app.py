@@ -2,12 +2,13 @@ from flask import Flask, jsonify
 from flask_restful import Resource, Api
 from importlib_metadata import version
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy.orm import sessionmaker
 import json
 from models.partida import PartidaModel
 from sqlalchemy import select
 from sqlalchemy import create_engine
 from database import Session
-from resource.partida import PartidasByName, PartidasByDate, PartidasFutebol, PartidasByParams
+from resource.partida import CriarPartidasFutebol, PartidasByName, PartidasByDate, PartidasFutebol, PartidasByParams
 
 
 app = Flask(__name__)
@@ -16,7 +17,7 @@ app.config['SQLAlchemy_TRACK_MODIFICATIONS'] = False
 
 
 api = Api(app)
-# database = SQLAlchemy(app)
+database = SQLAlchemy(app)
 
 
 # /partidas
@@ -28,7 +29,7 @@ api.add_resource(
     PartidasByDate, '/partidas-data/<int:dia>/<int:mes>/<int:ano>')
 # /partidas-params?time=Brasil
 api.add_resource(PartidasByParams, '/partidas-params')
-
+api.add_resource(CriarPartidasFutebol, '/partidas/')
 
 if __name__ == '__main__':
     app.run(debug=True)

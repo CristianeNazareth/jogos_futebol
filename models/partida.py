@@ -1,6 +1,9 @@
 from sqlalchemy.ext.declarative import declarative_base
 import sqlalchemy
 
+from sqlalchemy.orm import sessionmaker
+from random import randint
+from database import Session
 BaseModel = declarative_base()
 
 
@@ -12,8 +15,8 @@ class PartidaModel(BaseModel):
     time2 = sqlalchemy.Column(sqlalchemy.String(25))
     data_partida = sqlalchemy.Column(sqlalchemy.String(25))
 
-    def __init__(self, id_partida, time1, time2, data_partida):
-        self.id_partida = id_partida
+    def __init__(self, time1, time2, data_partida):
+        self.id_partida = randint(1, 9999)
         self.time1 = time1
         self.time2 = time2
         self.data_partida = data_partida
@@ -27,5 +30,6 @@ class PartidaModel(BaseModel):
         }
 
     def save_partida(self):
-        sqlalchemy.session.add(self)
-        sqlalchemy.session.commit()
+        with Session() as session:
+            session.add(self)
+            session.commit()
