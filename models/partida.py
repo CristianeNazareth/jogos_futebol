@@ -1,6 +1,5 @@
 from sqlalchemy.ext.declarative import declarative_base
 import sqlalchemy
-
 from sqlalchemy.orm import sessionmaker
 from random import randint
 from database import Session

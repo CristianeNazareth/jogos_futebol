@@ -1,6 +1,7 @@
 from flask import Flask, jsonify
+import flask
 from flask_restful import Resource, Api
-from importlib_metadata import version
+# from importlib_metadata import version
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.orm import sessionmaker
 import json
@@ -9,15 +10,18 @@ from sqlalchemy import select
 from sqlalchemy import create_engine
 from database import Session
 from resource.partida import CriarPartidasFutebol, PartidasByName, PartidasByDate, PartidasFutebol, PartidasByParams
+from flask_cors import CORS, cross_origin
 
 
 app = Flask(__name__)
 app.config['SQLAlchemy_TRACK_MODIFICATIONS'] = False
 # app.config['SQLALCHEMY_DATABASE_URI'] = 'psycopg2:///database'
-
+CORS(app, resources={r"*": {"origins": "*"}})
 
 api = Api(app)
 database = SQLAlchemy(app)
+
+
 
 
 # /partidas
